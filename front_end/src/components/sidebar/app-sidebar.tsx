@@ -10,6 +10,10 @@ import {
   SidebarMenu,
 } from "../ui/sidebar";
 import SidebarMenuItems from "./sidebar-menu-items";
+import { Credits } from "./credits";
+
+import Upgrade from "./upgrade";
+import { User } from "lucide-react";
 
 export async function AppSidebar() {
   return (
@@ -20,17 +24,29 @@ export async function AppSidebar() {
             <p>Vivid Gen</p>
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu><SidebarMenuItems /></SidebarMenu>
+            <SidebarMenu>
+              <SidebarMenuItems />
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-            <div>
-              {/* Credits */}
-              {/* Upgrade */}
-            </div>
-            <UserButton />
-          </SidebarFooter>
+        <div className="mb-2 flex w-full items-center justify-center gap-1 text-xs">
+          <Credits />
+          <Upgrade />
+        </div>
+        <UserButton
+          variant="outline"
+          size="default"
+          additionalLinks={[
+            {
+              label: "Customer Portal",
+              href: "/customer-portal",
+              icon: <User />,
+            },
+          ]}
+        />
+      </SidebarFooter>
     </Sidebar>
   );
 }

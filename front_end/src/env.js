@@ -21,6 +21,8 @@ export const env = createEnv({
       PHOTO_TO_VIDEO_ENDPOINT: z.string().url(),
       FILE_TO_S3_ENDPOINT: z.string().url(),
       FAL_API_KEY: z.string(),
+      POLAR_ACCESS_TOKEN: z.string(),
+      POLAR_WEBHOOK_SECRET: z.string(),
   },
 
   /**
@@ -30,6 +32,9 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_SMALL_CREDIT_ID: z.string(),
+    NEXT_PUBLIC_MEDIUM_CREDIT_ID: z.string(),
+    NEXT_PUBLIC_LARGE_CREDIT_ID: z.string()
   },
 
   /**
@@ -49,6 +54,11 @@ export const env = createEnv({
     PHOTO_TO_VIDEO_ENDPOINT: process.env.PHOTO_TO_VIDEO_ENDPOINT,
     FILE_TO_S3_ENDPOINT: process.env.FILE_TO_S3_ENDPOINT,
     FAL_API_KEY: process.env.FAL_API_KEY,
+    POLAR_ACCESS_TOKEN: process.env.POLAR_ACCESS_TOKEN,
+    NEXT_PUBLIC_SMALL_CREDIT_ID: process.env.NEXT_PUBLIC_SMALL_CREDIT_ID,
+    NEXT_PUBLIC_MEDIUM_CREDIT_ID: process.env.NEXT_PUBLIC_MEDIUM_CREDIT_ID,
+    NEXT_PUBLIC_LARGE_CREDIT_ID: process.env.NEXT_PUBLIC_LARGE_CREDIT_ID,
+    POLAR_WEBHOOK_SECRET: process.env.POLAR_WEBHOOK_SECRET
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

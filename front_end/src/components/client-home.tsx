@@ -11,10 +11,12 @@ import { Description } from "@radix-ui/react-dialog";
 import { useEffect, useRef, useState } from "react";
 import { PhotoToVideoModal } from "./modals/photo-to-video-modal";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 import { updateCreationName } from "~/actions/creations";
 import { VideoTranslationModal } from "./modals/video-translation-modal";
 import { ChangeVideoAudioModal } from "./modals/change-video-audio-modal";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { getVideoDuration } from "~/utilis/media";
+import { toast } from "sonner";
 
 const features = [
   {
@@ -62,6 +64,30 @@ export function ClientHome({
 
   const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
+    const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("purchase_success") === "true") {
+      toast.success(
+        "Purchase successful. Your credits will be available shortly. Please refresh the page to view your updated balance.",
+        { duration: 10000 },
+      );
+      router.replace(pathname);
+    }
+  }, [searchParams, router, pathname]);
+
+  useEffect(() => {
+    recentCreations.forEach((creation) => {
+      if (creation.videoUrl && creation.status === "completed") {
+        getVideoDuration(creation.videoUrl)
+          .then((duration) => {
+            setDurations((prev) => ({ ...prev, [creation.id]: duration }));
+          })
+          .catch(console.error);
+      }
+    });
+  }, [recentCreations]);
 
   const handlePlayPause = async (id: string) => {
     const video = videoRefs.current[id];
